@@ -13,7 +13,11 @@ const choices = Object.keys(Object.freeze({
     Paper: 1,
     Scissors: 2
 }))
+var playerChoice = '';
 var computerChoice = '';
+var playerPoints = 0;
+var computerPoints = 0;
+var remainingTurns = 10;
 
 function getComputerChoice(){
     computerChoice = choices[getRandomChoice()];
@@ -23,16 +27,47 @@ function getComputerChoice(){
 function getRandomChoice(){
     return Math.floor(Math.random() * (choices.length));
 }
+function checkWinner(player, computer){
+
+    var result = document.querySelector("#status");
+    result.innerHTML = '';
+    if(player === computer){
+        result.innerHTML = "It was a draw!"
+        return false;
+    }
+    
+    
+    switch(player){
+
+
+        case 'Rock':
+            if(computer === "Scissors"){
+
+                playerPoints++;
+                return true;
+            }
+            if(computer == 'Rock'){
+                return false;
+            }
+            if(computer == 'Paper'){
+                computerPoints--;
+                return false;
+            }
+    }
 
 
 
+}
 
+
+// Main execution.
 for(let i = 0; i < buttons.length; i++ ){
     buttons[i].addEventListener("click", function(){
-        output.innerHTML = 'You Clicked ' + buttons[i].textContent;
+        playerChoice = buttons[i].textContent;
+        output.innerHTML = 'You Clicked ' + playerChoice;
         getComputerChoice();
-        // compOutput.innerHTML = getComputerChoice();
-        // computerChoice = compOutput.innerHTML;
+        checkWinner(playerChoice, computerChoice);
+        remainingTurns--;
     });
 }
 
