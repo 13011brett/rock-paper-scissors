@@ -78,14 +78,14 @@ function checkWinner(player, computer){
 
             break;
 
-        case 'Paper':
+        case 'Scissors':
 
-            if(computer === "Rock"){
+            if(computer === "Paper"){
                 playerPoints++;
                 return true;
             }
 
-            if(computer === 'Scissors'){
+            if(computer === 'Rock'){
                 computerPoints++;
                 return false;
             }
@@ -113,6 +113,7 @@ for(let i = 0; i < buttons.length; i++ ){
         compScore.innerHTML = computerPoints;
         tries.innerHTML = remainingTurns;
         if(remainingTurns <= 0){
+            playerPoints > computerPoints ? result.innerHTML = "You have won, congratulations!" : result.innerHTML = "You have lost. Womp womp.";
             (buttons.forEach(function myFunction(button){
                 button.remove();
             }));
