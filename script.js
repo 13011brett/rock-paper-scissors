@@ -7,6 +7,7 @@
 const buttons = document.querySelectorAll('button');
 const output = document.querySelector('#text');
 const compOutput = document.querySelector('#comp');
+var result = document.querySelector("#status");
 
 const choices = Object.keys(Object.freeze({
     Rock: 0,
@@ -29,7 +30,7 @@ function getRandomChoice(){
 }
 function checkWinner(player, computer){
 
-    var result = document.querySelector("#status");
+
     result.innerHTML = '';
     if(player === computer){
         result.innerHTML = "It was a draw!"
@@ -42,17 +43,46 @@ function checkWinner(player, computer){
 
         case 'Rock':
             if(computer === "Scissors"){
-
                 playerPoints++;
                 return true;
             }
-            if(computer == 'Rock'){
+
+            if(computer === 'Paper'){
+                computerPoints++;
                 return false;
             }
-            if(computer == 'Paper'){
+
+            break;
+
+        case 'Paper':
+
+            if(computer === "Rock"){
+                playerPoints++;
+                return true;
+            }
+
+            if(computer === 'Scissors'){
+                computerPoints++;
+                return false;
+            }
+
+            break;
+
+        case 'Paper':
+
+            if(computer === "Rock"){
+                playerPoints++;
+                return true;
+            }
+
+            if(computer === 'Scissors'){
                 computerPoints--;
                 return false;
             }
+
+            break;
+
+
     }
 
 
@@ -66,7 +96,9 @@ for(let i = 0; i < buttons.length; i++ ){
         playerChoice = buttons[i].textContent;
         output.innerHTML = 'You Clicked ' + playerChoice;
         getComputerChoice();
-        checkWinner(playerChoice, computerChoice);
+        var winner = checkWinner(playerChoice, computerChoice);
+        (!winner && result.innerHTML === '') ? result.innerHTML = 'You have lost the duel...' : result.innerHTML = 'You have won, this time.'; 
+
         remainingTurns--;
     });
 }
