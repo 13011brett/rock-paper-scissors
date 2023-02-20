@@ -8,6 +8,12 @@ const buttons = document.querySelectorAll('button');
 const output = document.querySelector('#text');
 const compOutput = document.querySelector('#comp');
 var result = document.querySelector("#status");
+var tries = document.querySelector("#tries");
+var playScore = document.querySelector("#scoreplayer");
+var compScore = document.querySelector("#scorecomp");
+
+
+
 
 const choices = Object.keys(Object.freeze({
     Rock: 0,
@@ -20,6 +26,10 @@ var playerPoints = 0;
 var computerPoints = 0;
 var remainingTurns = 10;
 
+playScore.innerHTML = playerPoints;
+tries.innerHTML = remainingTurns;
+compScore.innerHTML = computerPoints;
+
 function getComputerChoice(){
     computerChoice = choices[getRandomChoice()];
     compOutput.innerHTML = "The Computer has selected " + computerChoice;
@@ -28,8 +38,8 @@ function getComputerChoice(){
 function getRandomChoice(){
     return Math.floor(Math.random() * (choices.length));
 }
-function checkWinner(player, computer){
 
+function checkWinner(player, computer){
 
     result.innerHTML = '';
     if(player === computer){
@@ -76,7 +86,7 @@ function checkWinner(player, computer){
             }
 
             if(computer === 'Scissors'){
-                computerPoints--;
+                computerPoints++;
                 return false;
             }
 
@@ -97,9 +107,20 @@ for(let i = 0; i < buttons.length; i++ ){
         output.innerHTML = 'You Clicked ' + playerChoice;
         getComputerChoice();
         var winner = checkWinner(playerChoice, computerChoice);
-        (!winner && result.innerHTML === '') ? result.innerHTML = 'You have lost the duel...' : result.innerHTML = 'You have won, this time.'; 
-
+        if(result.innerHTML === '') !winner ? result.innerHTML = 'You have lost the duel...' : result.innerHTML = 'You have won, this time.'; 
         remainingTurns--;
+        playScore.innerHTML = playerPoints;
+        compScore.innerHTML = computerPoints;
+        tries.innerHTML = remainingTurns;
+        if(remainingTurns <= 0){
+            (buttons.forEach(function myFunction(button){
+                button.remove();
+            }));
+
+
+            
+        }
+        
     });
 }
 
