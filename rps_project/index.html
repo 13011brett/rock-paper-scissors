@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <style>
+            *{
+                background-color: antiquewhite;
+            }
+            .basic{
+                display:flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                margin:auto;
+            }
+            .basic2{
+                display:flex;
+                flex-direction: column;
+                align-items: center;
+                
+                margin-top:30px;
+            }
+            .flex1{
+                margin:auto;
+                margin-top: 30px;
+                color: blue;
+            }
+            h1{
+                display:flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <h1 class="title">Rock, Paper... SCISSORS!</h1>
+        <div class="basic">
+            <button class="flex1" id="rock">Rock</button>
+            <button class="flex1" id="paper">Paper</button>
+            <button class="flex1" id="scissors">Scissors</button> <br>
+        </div>
+        <div class="basic2">
+            <h2 id="status"></h2>
+            <p id="text"></p>
+            <p id="comp"></p>
+            <p>Remaining attempts left: <span id="tries"> </span></p>
+            <p>Player has <span id="scoreplayer" ></span> points. </p>
+            <p>Computer has <span id="scorecomp" ></span> points. </p>
+        </div>
+        <script src="script.js">
+
+        </script>
+    </body>
+
+</html>
